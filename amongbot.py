@@ -1,4 +1,6 @@
 # Automatically make roles if they are not there
+# Ignore capitalization
+# Discord server owner setup initialization (input role names, channel names)
 from death import deathMessages
 from end import endMessages
 
@@ -44,14 +46,14 @@ async def _um(ctx):
     if discord.utils.get(ctx.guild.roles, name="Head Amonger") not in ctx.author.roles:
         await ctx.send("Only users with the Head Amonger role may use the bot.")
         return
-    # voiceChannel = ctx.author.voice.channel
+    
     voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='Among Us')
     for member in voiceChannel.members:
         await member.edit(mute=False)
     deadChannel = discord.utils.get(ctx.guild.voice_channels, name='Dead')
-    for deadMember in deadChannel.members:
-        await deadMember.edit(mute=True)
-        await deadMember.move_to(voiceChannel)
+    for member in deadChannel.members:
+        await member.edit(mute=True)
+        await member.move_to(discord.utils.get(ctx.guild.voice_channels, name='Among Us'))
     await ctx.send('All users in voice channel "' + str(ctx.author.voice.channel) + '" have been unmuted!')
 
 @bot.command(aliases=['dead','d'])
@@ -68,15 +70,18 @@ async def _d(ctx, user:discord.Member):
 
 @bot.command(aliases=['end','gg','e']) 
 async def _gg(ctx):
-    voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='Among Us')
-    deadChannel = discord.utils.get(ctx.guild.voice_channels, name='Dead')
     await ctx.send(random.choice(endMessages))
-    for deadMember in deadChannel.members:
-        await deadMember.move_to(voiceChannel)
+    deadChannel = discord.utils.get(ctx.guild.voice_channels, name='Dead')
+    voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='Among Us')
+    for member in deadChannel.members:
+        await member.move_to(voiceChannel)
     for member in ctx.guild.members:
         if discord.utils.get(ctx.guild.roles, name="Dead") in member.roles:
             await member.remove_roles(discord.utils.get(ctx.guild.roles, name="Dead"))
+        try:
             await member.edit(mute=False)
+        except:
+            continue
 
 bot.run(TOKEN)
 
