@@ -35,18 +35,17 @@ async def _m(ctx):
         return
     voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='Among Us')
     for member in voiceChannel.members:
-        if discord.utils.get(ctx.guild.roles, name="Dead") in member.roles:
+        if discord.utils.get(ctx.guild.roles, name="Dead") not in member.roles:
+            await member.edit(mute=True)
+        else:
             await member.move_to(discord.utils.get(ctx.guild.voice_channels, name='Dead'))
             await member.edit(mute=False)
-        else:
-            await member.edit(mute=True)
 
 @bot.command(aliases=['unmute','um','uma'])
 async def _um(ctx):
     if discord.utils.get(ctx.guild.roles, name="Head Amonger") not in ctx.author.roles:
         await ctx.send("Only users with the Head Amonger role may use the bot.")
         return
-    
     voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='Among Us')
     for member in voiceChannel.members:
         await member.edit(mute=False)
