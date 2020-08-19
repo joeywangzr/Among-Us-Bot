@@ -56,10 +56,13 @@ async def _um(ctx):
 
 @bot.command(aliases=['dead','d'])
 async def _d(ctx, user:discord.Member):
+    if discord.utils.get(ctx.guild.roles, name="Head Amonger") not in ctx.author.roles:
+        await ctx.send("Only users with the Head Amonger role may use the bot.")
+        return
     try:
+        await ctx.send(user.name + random.choice(deathMessages))
         await user.edit(mute=True)
         await user.add_roles(discord.utils.get(ctx.guild.roles, name="Dead"))
-        await ctx.send(user.name + random.choice(deathMessages))
     except:
         await ctx.send('Error: user not connected to voice channel.')
 
@@ -67,13 +70,13 @@ async def _d(ctx, user:discord.Member):
 async def _gg(ctx):
     voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='Among Us')
     deadChannel = discord.utils.get(ctx.guild.voice_channels, name='Dead')
+    await ctx.send(random.choice(endMessages))
     for deadMember in deadChannel.members:
         await deadMember.move_to(voiceChannel)
-    for member in voiceChannel.members:
-        await member.edit(mute=False)
+    for member in ctx.guild.members:
         if discord.utils.get(ctx.guild.roles, name="Dead") in member.roles:
             await member.remove_roles(discord.utils.get(ctx.guild.roles, name="Dead"))
-    await ctx.send(random.choice(endMessages))
+            await member.edit(mute=False)
 
 bot.run(TOKEN)
 
