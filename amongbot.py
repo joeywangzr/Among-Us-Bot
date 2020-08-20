@@ -48,7 +48,10 @@ async def _um(ctx):
         return
     voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='Among Us')
     for member in voiceChannel.members:
-        await member.edit(mute=False)
+        if discord.utils.get(ctx.guild.roles, name="Dead") in member.roles:
+            await member.edit(mute=True)
+        else:
+            await member.edit(mute=False)
     deadChannel = discord.utils.get(ctx.guild.voice_channels, name='Dead')
     for member in deadChannel.members:
         await member.edit(mute=True)
@@ -60,7 +63,7 @@ async def _d(ctx, user:discord.Member):
     if discord.utils.get(ctx.guild.roles, name="Head Amonger") not in ctx.author.roles:
         await ctx.send("Only users with the Head Amonger role may use the bot.")
         return
-    try:
+    try:# users can mute themselves if they die
         await ctx.send(user.name + random.choice(deathMessages))
         await user.edit(mute=True)
         await user.add_roles(discord.utils.get(ctx.guild.roles, name="Dead"))
