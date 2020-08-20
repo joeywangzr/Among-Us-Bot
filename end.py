@@ -9,4 +9,5 @@ endMessages = [
     'Thank you! But our princess is in another castle!',
     'You cannot give up just yet... \n Stay determined!',
     'I have successfully held taken all your families hostage. Next person who talks will have their mother\'s ribcage transformed into my personal fruit bowl.'
+    '#1 Victory Royale!'
 ]
