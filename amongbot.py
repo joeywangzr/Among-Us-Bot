@@ -81,14 +81,11 @@ async def _d(ctx, user:discord.Member):
     if discord.utils.get(ctx.guild.roles, name='Head Amonger') not in ctx.author.roles:
         await ctx.send('```Only users with the Head Amonger role may use the bot.```')
         return
-    try:# users can mute themselves if they die
-        embed = discord.Embed(description=user.name + random.choice(deathMessages), colour=discord.Color.orange())
-        await ctx.send(embed=embed)
-        await user.edit(mute=True)
-        await user.add_roles(discord.utils.get(ctx.guild.roles, name='Dead'))
-    except:
-        embed = discord.Embed(description='User is not connected to a voice chanel.', colour=discord.Color.orange())
-        await ctx.send(embed=embed)
+    # try:# users can mute themselves if they die
+    embed = discord.Embed(description=user.name + random.choice(deathMessages), colour=discord.Color.orange())
+    await ctx.send(embed=embed)
+    await user.edit(mute=True)
+    await user.add_roles(discord.utils.get(ctx.guild.roles, name='Dead'))
 
 @bot.command(aliases=['end','gg','e']) 
 async def _gg(ctx):
