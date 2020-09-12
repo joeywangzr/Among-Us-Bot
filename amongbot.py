@@ -17,7 +17,7 @@ with open('token.txt', 'r') as f:
     lines = f.readlines()
     TOKEN = lines[0].strip()
 
-bot = commands.Bot(command_prefix='=')
+bot = commands.Bot(command_prefix='~')
 bot.remove_command('help')
 
 # Starts the bot, with a status.
@@ -41,7 +41,7 @@ async def _h(ctx):
 
 @bot.command(aliases=['gc','code','start'])
 async def _gc(ctx, code):
-    embed = discord.Embed(title='GAME CODE:', description=code, colour=discord.Color.orange())
+    embed = discord.Embed(title='GAME CODE:', description='**'+code+'**', colour=discord.Color.orange())
     await ctx.send(embed=embed)
 
 @bot.command(aliases=['mute','m','ma'])
@@ -100,6 +100,20 @@ async def _gg(ctx):
     for member in ctx.guild.members:
         if discord.utils.get(ctx.guild.roles, name='Dead') in member.roles:
             await member.remove_roles(discord.utils.get(ctx.guild.roles, name='Dead'))
+
+players = []
+
+@bot.command(aliases=['play','p'])
+async def _p(ctx):
+    players.append(ctx.author.name)
+    embed = discord.Embed(title=str(ctx.author.name) + ' wants to play Among Us!', description='There are ' + len(players) + ' in the party. Type =p to join!')
+    await ctx.send(embed=embed)
+
+@bot.command(aliases=['exit','e'])
+async def _e(ctx):
+    players.remove(ctx.author.name)
+    embed = discord.Embed(description='You have been removed from the queue. Type =p to rejoin!')
+    await ctx.send(embed=embed)
 
 bot.run(TOKEN)
 
