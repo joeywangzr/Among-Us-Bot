@@ -22,7 +22,7 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     print('Amonger is online!')
-    await bot.change_presence(status = discord.Status.online, activity=discord.Game('=help'))
+    await bot.change_presence(status = discord.Status.online, activity=discord.Game('-help'))
 
 # Error handling.
 # @bot.event
