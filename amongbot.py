@@ -91,7 +91,7 @@ async def _d(ctx, user:discord.Member):
     await user.edit(mute=True)
     await user.add_roles(discord.utils.get(ctx.guild.roles, name='Dead'))
 
-@bot.command(aliases=['end','gg','e']) 
+@bot.command(aliases=['end','gg']) 
 async def _gg(ctx):
     global players
     players = []
