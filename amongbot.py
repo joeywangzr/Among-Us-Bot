@@ -127,7 +127,7 @@ async def _q(ctx):
     embed = discord.Embed(title='**QUEUE:**',description=players + ' are all in the queue.')
     await ctx.send(embed=embed)
 
-bot.run(os.environ(['TOKEN']))
+bot.run(os.environ[('TOKEN')])
 
 # Feature + detect player status?
 # Feature - player set waiting music, other stuff
