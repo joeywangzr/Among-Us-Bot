@@ -15,10 +15,6 @@ from discord.utils import get
 
 players = []
 
-with open('token.txt', 'r') as f:
-    lines = f.readlines()
-    TOKEN = lines[0].strip()
-
 bot = commands.Bot(command_prefix='~')
 bot.remove_command('help')
 
