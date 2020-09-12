@@ -125,7 +125,7 @@ async def _e(ctx):
     embed = discord.Embed(description='You have been removed from the queue. Type =p to rejoin!')
     await ctx.send(embed=embed)
 
-bot.run(TOKEN)
+bot.run(os.environ(['TOKEN']))
 
 # Feature + detect player status?
 # Feature - player set waiting music, other stuff
