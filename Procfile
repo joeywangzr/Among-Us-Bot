@@ -1,1 +1,1 @@
-worker: python help.py
+worker: python amongbot.py
