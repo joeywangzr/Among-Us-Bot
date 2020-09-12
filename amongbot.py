@@ -13,6 +13,8 @@ import discord
 from discord.ext import commands
 from discord.utils import get
 
+players = []
+
 with open('token.txt', 'r') as f:
     lines = f.readlines()
     TOKEN = lines[0].strip()
@@ -46,6 +48,8 @@ async def _gc(ctx, code):
 
 @bot.command(aliases=['mute','m','ma'])
 async def _m(ctx):
+    global players
+    players = []
     if discord.utils.get(ctx.guild.roles, name='Head Amonger') not in ctx.author.roles:
         await ctx.send('```Only users with the Head Amonger role may use the bot.```')
         return
@@ -61,6 +65,8 @@ async def _m(ctx):
 
 @bot.command(aliases=['unmute','um','uma'])
 async def _um(ctx):
+    global players
+    players = []
     if discord.utils.get(ctx.guild.roles, name='Head Amonger') not in ctx.author.roles:
         await ctx.send('```Only users with the Head Amonger role may use the bot.```')
         return
@@ -78,6 +84,8 @@ async def _um(ctx):
 
 @bot.command(aliases=['dead','d'])
 async def _d(ctx, user:discord.Member):
+    global players
+    players = []
     if discord.utils.get(ctx.guild.roles, name='Head Amonger') not in ctx.author.roles:
         await ctx.send('```Only users with the Head Amonger role may use the bot.```')
         return
@@ -89,6 +97,8 @@ async def _d(ctx, user:discord.Member):
 
 @bot.command(aliases=['end','gg','e']) 
 async def _gg(ctx):
+    global players
+    players = []
     embed = discord.Embed(description=random.choice(endMessages), colour=discord.Color.orange())
     await ctx.send(embed=embed)
     deadChannel = discord.utils.get(ctx.guild.voice_channels, name='Dead')
@@ -101,16 +111,16 @@ async def _gg(ctx):
         if discord.utils.get(ctx.guild.roles, name='Dead') in member.roles:
             await member.remove_roles(discord.utils.get(ctx.guild.roles, name='Dead'))
 
-players = []
-
 @bot.command(aliases=['play','p'])
 async def _p(ctx):
+    global players
     players.append(ctx.author.name)
     embed = discord.Embed(title=str(ctx.author.name) + ' wants to play Among Us!', description='There are ' + len(players) + ' in the party. Type =p to join!')
     await ctx.send(embed=embed)
 
 @bot.command(aliases=['exit','e'])
 async def _e(ctx):
+    global players
     players.remove(ctx.author.name)
     embed = discord.Embed(description='You have been removed from the queue. Type =p to rejoin!')
     await ctx.send(embed=embed)
