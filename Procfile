@@ -1,3 +1,3 @@
-worker: python amongbot.py
-worker: python death.py
-worker: python end.py
+among: python amongbot.py
+death: python death.py
+end: python end.py
