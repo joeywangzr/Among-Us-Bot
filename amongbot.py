@@ -5,7 +5,7 @@
 # set custom channel for each discord server
 # add embeds 
 from death import deathMessages
-from end import endMessages
+from death import endMessages
 
 import os
 import random
@@ -123,6 +123,12 @@ async def _e(ctx):
     global players
     players.remove(ctx.author.name)
     embed = discord.Embed(description='You have been removed from the queue. Type =p to rejoin!')
+    await ctx.send(embed=embed)
+
+@bot.command(aliases=['queue','q'])
+async def _q(ctx):
+    global players
+    embed = discord.Embed(title='**QUEUE:**',description=players + ' are all in the queue.')
     await ctx.send(embed=embed)
 
 bot.run(os.environ(['TOKEN']))
