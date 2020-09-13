@@ -111,7 +111,7 @@ async def _gg(ctx):
 async def _j(ctx):
     global players
     players.append(str(ctx.author.name))
-    embed = discord.Embed(title=str(ctx.author.name) + ' wants to play Among Us!', description='There are ' + str(len(players)) + ' in the queue. Type -join to join!')
+    embed = discord.Embed(title=str(ctx.author.name) + ' wants to play Among Us!', description='There are ' + str(len(players)) + ' in the queue. Type -join to join the queue!')
     await ctx.send(embed=embed)
 
 @bot.command(aliases=['exit','e'])
@@ -124,7 +124,7 @@ async def _e(ctx):
 @bot.command(aliases=['queue','q'])
 async def _q(ctx):
     global players
-    embed = discord.Embed(title='**QUEUE:**',description=players + ' are all in the queue.')
+    embed = discord.Embed(title='**QUEUE:**',description=' '.join(players) + ' are all in the queue.')
     await ctx.send(embed=embed)
 
 bot.run(os.environ[('TOKEN')])
