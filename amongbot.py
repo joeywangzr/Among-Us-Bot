@@ -107,8 +107,8 @@ async def _gg(ctx):
         if discord.utils.get(ctx.guild.roles, name='Dead') in member.roles:
             await member.remove_roles(discord.utils.get(ctx.guild.roles, name='Dead'))
 
-@bot.command(aliases=['play','p'])
-async def _p(ctx):
+@bot.command(aliases=['join','j'])
+async def _j(ctx):
     global players
     players.append(ctx.author.name)
     embed = discord.Embed(title=str(ctx.author.name) + ' wants to play Among Us!', description='There are ' + len(players) + ' in the party. Type =p to join!')
