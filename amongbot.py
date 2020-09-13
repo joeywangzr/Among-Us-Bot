@@ -32,7 +32,7 @@ async def on_ready():
 
 @bot.command(aliases=['h','help'])
 async def _h(ctx):
-    embed = discord.Embed(title='Bot Commands', description='`-j`: JOIN QUEUE\n`-e`: EXIT QUEUE\n`-q`: VIEW QUEUE\n`-m`: MUTE ALL\n`-um`: UNMUTE ALL\n`-d username`: KILL PLAYER\n`-gg`: END GAME')
+    embed = discord.Embed(title='Bot Commands', description='-j: join queue\n-e: exit queue\n-q: view queue\n-m: mute all\n-um: unmute all\n-d username: kill player\n-gg: end game')
     await ctx.send(embed=embed)
 @bot.command(aliases=['gc','code','start'])
 async def _gc(ctx, code):
@@ -112,7 +112,7 @@ async def _j(ctx):
         await ctx.send(embed=embed)
     else:
         players.append(str(ctx.author.name))
-        embed = discord.Embed(title=str(ctx.author.name) + ' wants to play Among Us!', description='There are ' + str(len(players)) + ' in the queue. Type -join to join the queue!')
+        embed = discord.Embed(title=str(ctx.author.name) + ' wants to play Among Us!', description='There are ' + str(len(players)) + ' players in the queue. Type -join to join the queue!')
         await ctx.send(embed=embed)
 
 @bot.command(aliases=['exit','e'])
