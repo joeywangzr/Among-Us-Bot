@@ -133,7 +133,7 @@ async def _e(ctx):
 async def _q(ctx):
     global players
     if len(players) > 0:
-        embed = discord.Embed(title='**QUEUE:**',description=' '.join(players) + ' are all in the queue.')
+        embed = discord.Embed(title='**QUEUE:**',description=', '.join(players) + ' are all in the queue.')
         await ctx.send(embed=embed)
     else:
         embed = discord.Embed(title='**QUEUE:**', description='No one is in the queue. Type -join to join the queue!')
