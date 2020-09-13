@@ -32,7 +32,7 @@ async def on_ready():
 
 @bot.command(aliases=['h','help'])
 async def _h(ctx):
-    embed = discord.Embed(title='Bot Commands', description='`-j`: JOIN QUEUE\n`-e`: EXIT QUEUE\n`-q`: VIEW QUEUE\n`-m`: MUTE ALL\n`-um`: UNMUTE ALL\n`-d {\username}`: KILL PLAYER\n`-gg`: END GAME)
+    embed = discord.Embed(title='Bot Commands', description='`-j`: JOIN QUEUE\n`-e`: EXIT QUEUE\n`-q`: VIEW QUEUE\n`-m`: MUTE ALL\n`-um`: UNMUTE ALL\n`-d {\username}`: KILL PLAYER\n`-gg`: END GAME')
 
 @bot.command(aliases=['gc','code','start'])
 async def _gc(ctx, code):
