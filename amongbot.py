@@ -110,15 +110,15 @@ async def _gg(ctx):
 @bot.command(aliases=['join','j'])
 async def _j(ctx):
     global players
-    players.append(ctx.author.name)
-    embed = discord.Embed(title=str(ctx.author.name) + ' wants to play Among Us!', description='There are ' + len(players) + ' in the party. Type =p to join!')
+    players.append(str(ctx.author.name))
+    embed = discord.Embed(title=str(ctx.author.name) + ' wants to play Among Us!', description='There are ' + len(players) + ' in the queue. Type -join to join!')
     await ctx.send(embed=embed)
 
 @bot.command(aliases=['exit','e'])
 async def _e(ctx):
     global players
-    players.remove(ctx.author.name)
-    embed = discord.Embed(description='You have been removed from the queue. Type =p to rejoin!')
+    players.remove(str(ctx.author.name))
+    embed = discord.Embed(description='You have been removed from the queue. Type -join to rejoin!')
     await ctx.send(embed=embed)
 
 @bot.command(aliases=['queue','q'])
