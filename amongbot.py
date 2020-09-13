@@ -109,17 +109,23 @@ async def _gg(ctx):
 
 @bot.command(aliases=['join','j'])
 async def _j(ctx):
-    global players
-    players.append(str(ctx.author.name))
-    embed = discord.Embed(title=str(ctx.author.name) + ' wants to play Among Us!', description='There are ' + str(len(players)) + ' in the queue. Type -join to join the queue!')
-    await ctx.send(embed=embed)
+    if ctx.author.name in players:
+        embed = discord.Embed(description='You are already in the queue! Type -exit to leave.')
+    else:
+        global players
+        players.append(str(ctx.author.name))
+        embed = discord.Embed(title=str(ctx.author.name) + ' wants to play Among Us!', description='There are ' + str(len(players)) + ' in the queue. Type -join to join the queue!')
+        await ctx.send(embed=embed)
 
 @bot.command(aliases=['exit','e'])
 async def _e(ctx):
-    global players
-    players.remove(str(ctx.author.name))
-    embed = discord.Embed(description='You have been removed from the queue. Type -join to rejoin!')
-    await ctx.send(embed=embed)
+    if ctx.author.name not in players:
+        embed = discord.Embed(description='You cannot leave if you aren\'t in the queue! Type -join to join.')
+    else:
+        global players
+        players.remove(str(ctx.author.name))
+        embed = discord.Embed(description='You have been removed from the queue. Type -join to rejoin!')
+        await ctx.send(embed=embed)
 
 @bot.command(aliases=['queue','q'])
 async def _q(ctx):
