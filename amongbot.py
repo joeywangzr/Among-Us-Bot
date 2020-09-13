@@ -111,6 +111,7 @@ async def _gg(ctx):
 async def _j(ctx):
     if ctx.author.name in players:
         embed = discord.Embed(description='You are already in the queue! Type -exit to leave.')
+        await ctx.send(embed=embed)
     else:
         global players
         players.append(str(ctx.author.name))
@@ -121,6 +122,7 @@ async def _j(ctx):
 async def _e(ctx):
     if ctx.author.name not in players:
         embed = discord.Embed(description='You cannot leave if you aren\'t in the queue! Type -join to join.')
+        await ctx.send(embed=embed)
     else:
         global players
         players.remove(str(ctx.author.name))
@@ -130,8 +132,12 @@ async def _e(ctx):
 @bot.command(aliases=['queue','q'])
 async def _q(ctx):
     global players
-    embed = discord.Embed(title='**QUEUE:**',description=' '.join(players) + ' are all in the queue.')
-    await ctx.send(embed=embed)
+    if len(players) > 0:
+        embed = discord.Embed(title='**QUEUE:**',description=' '.join(players) + ' are all in the queue.')
+        await ctx.send(embed=embed)
+    else:
+        embed = discord.Embed(title='**QUEUE:**', description='No one is in the queue. Type -join to join the queue!')
+        await ctx.send(embed=embed)
 
 bot.run(os.environ[('TOKEN')])
 
