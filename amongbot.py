@@ -25,10 +25,10 @@ async def on_ready():
     await bot.change_presence(status = discord.Status.online, activity=discord.Game('-help'))
 
 # Error handling.
-@bot.event
-async def on_command_error(ctx, error):
-    embed = discord.Embed(title='ERROR', description='Invalid argument.', colour=discord.Color.orange())
-    await ctx.send(embed=embed)
+# @bot.event
+# async def on_command_error(ctx, error):
+#     embed = discord.Embed(title='ERROR', description='Invalid argument.', colour=discord.Color.orange())
+#     await ctx.send(embed=embed)
 
 @bot.command(aliases=['h','help'])
 async def _h(ctx):
