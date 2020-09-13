@@ -111,7 +111,7 @@ async def _gg(ctx):
 async def _j(ctx):
     global players
     players.append(str(ctx.author.name))
-    embed = discord.Embed(title=str(ctx.author.name) + ' wants to play Among Us!', description='There are ' + len(players) + ' in the queue. Type -join to join!')
+    embed = discord.Embed(title=str(ctx.author.name) + ' wants to play Among Us!', description='There are ' + str(len(players)) + ' in the queue. Type -join to join!')
     await ctx.send(embed=embed)
 
 @bot.command(aliases=['exit','e'])
