@@ -65,13 +65,11 @@ async def _um(ctx):
         return
     voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='Among Us')
     deadChannel = discord.utils.get(ctx.guild.voice_channels, name='Dead')
+    for member in voiceChannel.members:
+            await member.edit(mute=False)
     for member in deadChannel.members:
-        # await member.edit(mute=True)
         await member.move_to(discord.utils.get(ctx.guild.voice_channels, name='Among Us'))
         await member.edit(mute=True)
-    for member in voiceChannel.members:
-        if discord.utils.get(ctx.guild.roles, name='Dead') not in member.roles:
-            await member.edit(mute=False)
     embed = discord.Embed(description='All users in voice channel "' + str(ctx.author.voice.channel) + '" have been unmuted!', colour=discord.Color.orange())
     await ctx.send(embed=embed)
 
@@ -79,7 +77,9 @@ async def _um(ctx):
 async def _d(ctx, user:discord.Member):
     global players
     players = []
-    if discord.utils.get(ctx.guild.roles, name='Head Amonger') not in ctx.author.roles:
+    if ctx == ctx.author.name:
+        pass
+    elif discord.utils.get(ctx.guild.roles, name='Head Amonger') not in ctx.author.roles:
         await ctx.send('```Only users with the Head Amonger role may use the bot.```')
         return
     # try:# users can mute themselves if they die
@@ -96,6 +96,8 @@ async def _gg(ctx):
     await ctx.send(embed=embed)
     deadChannel = discord.utils.get(ctx.guild.voice_channels, name='Dead')
     voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='Among Us')
+    for member in voiceChannel.members:
+        await member.edit(mute=False)
     for member in deadChannel.members:
         await member.move_to(voiceChannel)
     for member in voiceChannel.members:
