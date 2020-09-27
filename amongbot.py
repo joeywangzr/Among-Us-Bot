@@ -66,7 +66,7 @@ async def _um(ctx):
     voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='Among Us')
     deadChannel = discord.utils.get(ctx.guild.voice_channels, name='Dead')
     for member in voiceChannel.members:
-            await member.edit(mute=False)
+        await member.edit(mute=False)
     for member in deadChannel.members:
         await member.move_to(discord.utils.get(ctx.guild.voice_channels, name='Among Us'))
         await member.edit(mute=True)
